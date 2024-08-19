@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+header {
+  margin: 40px;;
+  padding: 20px;
+}
+
+main {
+  background-color: white;
+}
+
+
+.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.item {
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+
+.item p {
+  text-align: left;
+}
+
+.item form {
+  text-align: right;
+}
+
+.item input[type=submit] {
+  border-radius: 30px;
+}
+.item img {
+  width: 300px;
+  object-fit: cover;
+}
