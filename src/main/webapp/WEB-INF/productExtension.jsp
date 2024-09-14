@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +34,7 @@
       </c:if>
     </ul>
   </header>
-  <main
-
+  <main>
      <div class="item">
         <img
           srr="<c:out value="${ product.imagePath }"/>"
@@ -48,7 +50,8 @@
           <c:out value="${ product.extension }" />
         </p>
       </div>
-  </main>
+
+ 
   </main>
   <footer>
   </footer>

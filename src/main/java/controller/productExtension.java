@@ -51,7 +51,7 @@ public class productExtension extends HttpServlet {
         request.setAttribute("product", product);
 
 
-        RequestDispatcher dispather = request.getRequestDispatcher("WEB-INF/view/productExtension.jsp");
+        RequestDispatcher dispather = request.getRequestDispatcher("WEB-INF/productExtension.jsp");
         dispather.forward(request, response);
 
     }

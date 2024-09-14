@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import model.beans.Product;
 
@@ -96,4 +97,23 @@ public class ProductDaoImpl implements ProductDao {
         return null;
     }
 
+    @Override
+    public Optional<Integer> pieces() {
+        String sql = "SELECT SUM(ID) FROM product";
+        try (Connection conn = DriverManager.getConnection(URL,USER,PASS)) {
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+
+            ResultSet rs = pStmt.executeQuery();
+
+            rs.next();
+
+            Optional<Integer> pieces = Optional.ofNullable(rs.getInt(1));
+            return pieces;
+        } catch(SQLException e) {
+            e.printStackTrace();
+            Optional<Integer> pieces = Optional.ofNullable(null);
+
+            return pieces;
+        }
+    }
 }

@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.sendRedirect("view/loginForm.jsp");
+        response.sendRedirect("loginForm.jsp");
 
     }
 
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
         User loginUser = dao.login(name, password);
 
         if (loginUser == null) {
-            response.sendRedirect("view/loginForm.jsp");
+            response.sendRedirect("loginForm.jsp");
         }
 
         HttpSession session = request.getSession();

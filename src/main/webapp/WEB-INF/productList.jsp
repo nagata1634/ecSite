@@ -117,6 +117,20 @@
       </div>
     </c:forEach>
    </div>
+<!-- ページ遷移 -->
+   <div>
+    <form action="product" method="GET">
+      <input type="hidden" name="page" value="<c:out value="${ page.page - 1 }" />" />
+      <input type="submit" value="戻る" />
+    </form>
+    <p>
+      <c:out value="${ page.page }" />
+    </p>
+    <form action="product" method="GET">
+      <input type="hidden" name="page" value="<c:out value="${ page.page + 1 }" />" />
+      <input type="submit" value="進む">
+    </form>
+   </div>
   </main>
   <footer>
   </footer>

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -33,10 +34,38 @@ public class CartServlet extends HttpServlet {
     }
 
     /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//    	ログイン確認
+        HttpSession session = request.getSession();
+
+        Optional<User> user = Optional.ofNullable((User)session.getAttribute("user"));
+
+        if (!user.isPresent()) {
+            response.sendRedirect("login");
+
+            return;
+        }
+//		カート情報取得
+        CartDao dao = new CartDaoImpl();
+
+        List<Product> productList = dao.getCartList(user.get().getId());
+        request.setAttribute("products", productList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Cart.jsp");
+        dispatcher.forward(request, response);
+    }
+    /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+
+
+
+//		カートの中身を取得して表示
         String productIdStr = request.getParameter("productId");
         String userIdStr = request.getParameter("userId");
 //        String userIdStr = "2";
@@ -55,30 +84,8 @@ public class CartServlet extends HttpServlet {
         if (result) {
             response.sendRedirect("product");
         } else {
-            response.sendRedirect("view/errer.jsp");
+            response.sendRedirect("errer.jsp");
         }
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-
-        User user = (User)session.getAttribute("user");
-
-        if (user == null) {
-            response.sendRedirect("view/product");
-        }
-
-        CartDao dao = new CartDaoImpl();
-        List<Product> productList = dao.getCartList(user.getId());
-
-        request.setAttribute("products", productList);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/view/Cart.jsp");
-        dispatcher.forward(request, response);
     }
 
 }

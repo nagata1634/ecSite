@@ -32,7 +32,7 @@ public class UserRegistration extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("GET");
-        response.sendRedirect("view/userRegistrationForm.jsp");
+        response.sendRedirect("userRegistrationForm.jsp");
     }
 
     /**
@@ -54,7 +54,7 @@ public class UserRegistration extends HttpServlet {
 //        	登録が出来なかったら戻す
             System.out.println("registration errer");
             request.setAttribute("errer", "errer");
-            response.sendRedirect("view/userRegistrationForm.jsp");
+            response.sendRedirect("userRegistrationForm.jsp");
         } else {
 //        	出来たらloginpageへ
             response.sendRedirect("login");
